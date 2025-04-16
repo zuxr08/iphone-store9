@@ -1,0 +1,235 @@
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>iStore — Магазин iPhone</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    html, body {
+      height: 100%;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background-color: #ccc;
+      overflow: hidden;
+      color: black;
+    }
+    .page {
+      position: absolute;
+      width: 100vw;
+      height: 100vh;
+      display: none;
+      justify-content: center;
+      align-items: center;
+      flex-direction: column;
+      background-color: #d3d3d3;
+      background-repeat: no-repeat;
+      background-position: center;
+      background-size: cover;
+      text-align: center;
+      animation: fadeSlide 1.5s ease;
+    }
+    .page.active {
+      display: flex;
+    }
+    .page:first-child {
+      animation: zoomEffect 10s ease-in-out infinite alternate;
+    }
+    .nav {
+      position: absolute;
+      top: 20px;
+      left: 50%;
+      transform: translateX(-50%);
+      z-index: 10;
+      display: flex;
+      gap: 80px;
+    }
+    .nav button {
+      background: rgba(255,255,255,0.9);
+      color: black;
+      border: 1px solid #333;
+      padding: 10px 25px;
+      cursor: pointer;
+      border-radius: 50px;
+      transition: background 0.3s ease;
+    }
+    .nav button:hover {
+      background: rgba(220,220,220,1);
+    }
+    h1 {
+      font-size: 4vw;
+      text-shadow: 0 0 10px rgba(255,255,255,0.4);
+    }
+    p {
+      font-size: 1.5vw;
+      max-width: 800px;
+      margin-top: 20px;
+    }
+    .models, .tech-list {
+      display: flex;
+      gap: 60px;
+      flex-wrap: wrap;
+      justify-content: center;
+      margin-top: 30px;
+    }
+    .model, .tech-item {
+      background: rgba(255, 255, 255, 0.9);
+      border-radius: 30px;
+      padding: 20px;
+      max-width: 250px;
+      text-align: center;
+      backdrop-filter: blur(10px);
+      color: black;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+      animation: slideIn 1s ease both;
+    }
+    .model img, .tech-item img {
+      width: 100%;
+      border-radius: 20px;
+    }
+    .model h3, .tech-item h3 {
+      margin: 10px 0 5px;
+      font-size: 1.2em;
+    }
+    .model p, .tech-item p {
+      font-size: 0.9em;
+    }
+    .buy-options button {
+      margin-top: 10px;
+      padding: 8px 16px;
+      border: none;
+      background-color: #007aff;
+      color: white;
+      border-radius: 8px;
+      cursor: pointer;
+    }
+    .installment {
+      margin-top: 10px;
+      font-size: 0.8em;
+      color: #555;
+      display: none;
+    }
+    .installment.show {
+      display: block;
+    }
+    @keyframes zoomEffect {
+      0% { transform: scale(1); }
+      100% { transform: scale(1.2); }
+    }
+    @keyframes slideIn {
+      from {
+        transform: translateY(50px);
+        opacity: 0;
+      }
+      to {
+        transform: translateY(0);
+        opacity: 1;
+      }
+    }
+    .welcome-message {
+      font-size: 1.4vw;
+      margin-top: 50px;
+      animation: fadeInScale 2s ease forwards;
+      opacity: 0;
+      transform: scale(0.8);
+      color: #000;
+      background: rgba(255,255,255,0.7);
+      padding: 15px 30px;
+      border-radius: 20px;
+      backdrop-filter: blur(4px);
+      text-shadow: 0 0 5px rgba(255,255,255,0.5);
+    }
+    @keyframes fadeInScale {
+      to {
+        opacity: 1;
+        transform: scale(1);
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="nav">
+    <button onclick="showPage(0)">Главная</button>
+    <button onclick="showPage(1)">Модели</button>
+    <button onclick="showPage(2)">Технологии</button>
+    <button onclick="showPage(3)">Свяжитесь</button>
+  </div>
+
+  <div class="page active" style="background-image: url('44562ba5-5e37-4fee-994f-e016a4a97799.jfif');">
+    <h1>iStore</h1>
+    <p>Ваш путь к оригинальному iPhone начинается здесь</p>
+    <div class="welcome-message">Добро пожаловать в наш фирменный магазин Apple!</div>
+  </div>
+
+  <div class="page">
+    <h1>Модели iPhone</h1>
+    <div class="models" id="models-container"></div>
+  </div>
+
+  <div class="page">
+    <h1>Технологии Apple</h1>
+    <div class="tech-list">
+      <div class="tech-item">
+        <img src="airpods.jpg" alt="AirPods">
+        <h3>AirPods</h3>
+        <p>Беспроводные наушники с отличным звуком и простым подключением.</p>
+      </div>
+      <div class="tech-item">
+        <img src="macbook.jpg" alt="MacBook">
+        <h3>MacBook</h3>
+        <p>Мощный ноутбук для работы, учёбы и творчества.</p>
+      </div>
+      <div class="tech-item">
+        <img src="ipad.jpg" alt="iPad">
+        <h3>iPad</h3>
+        <p>Универсальный планшет для развлечений и продуктивности.</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="page">
+    <h1>Свяжитесь с нами</h1>
+    <p>📞 +998940510385<br>📧 hello@istore.ru<br>Москва, ул. Технологий, д. 15</p>
+  </div>
+
+  <script>
+    const pages = document.querySelectorAll('.page');
+    function showPage(index) {
+      pages.forEach((page, i) => {
+        page.classList.toggle('active', i === index);
+      });
+    }
+
+    function toggleInstallment(button) {
+      const installment = button.nextElementSibling;
+      installment.classList.toggle('show');
+    }
+
+    const models = [
+      {name: "iPhone 13", price: 799, img: "253b3977-aee9-4c58-8bfa-92cf9a55dd04.png"},
+      {name: "iPhone 14 Pro", price: 1299, img: "253b3977-aee9-4c58-8bfa-92cf9a55dd04.png"},
+      {name: "iPhone 15", price: 1399, img: "ae11a28c-13aa-4a8d-9283-00572deecec0.png"},
+    ];
+
+    const modelsContainer = document.getElementById('models-container');
+    models.forEach(model => {
+      const div = document.createElement('div');
+      div.className = 'model';
+      div.innerHTML = `
+        <img src="${model.img}" alt="${model.name}">
+        <h3>${model.name}</h3>
+        <p>Цена: ${model.price}$</p>
+        <div class="buy-options">
+          <button onclick="toggleInstallment(this)">Рассрочка</button>
+          <div class="installment">
+            6 месяцев: ${Math.round(model.price / 6)}$/мес<br>
+            12 месяцев: ${Math.round(model.price / 12)}$/мес
+          </div>
+        </div>
+      `;
+      modelsContainer.appendChild(div);
+    });
+  </script>
+</body>
